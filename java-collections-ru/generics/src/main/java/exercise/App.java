@@ -22,7 +22,7 @@ class App {
                     }
                 }
             }
-            if(test) {
+            if (test) {
                 result.add(book);
             }
         }
