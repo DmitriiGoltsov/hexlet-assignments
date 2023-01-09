@@ -1,8 +1,7 @@
 package exercise;
 
-import org.junit.jupiter.api.Assertions;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.assertThat;
 
 // BEGIN
 class AppTest {
@@ -40,7 +39,8 @@ class AppTest {
                 {"*", "*", "*", "*", "*", "*", "*", "*"},
                 {"*", "*", "*", "*", "*", "*", "*", "*"},
         };
-        Assertions.assertEquals(actual, expected);
+        Assertions.assertThat(actual)
+                .isEqualTo(expected);
     }
 
     @Test
@@ -56,7 +56,8 @@ class AppTest {
                 {"", "", "", "", "", "", "", ""},
                 {"", "", "", "", "", "", "", ""},
         };
-        Assertions.assertEquals(actual2, expected2);
+        Assertions.assertThat(actual2)
+                .isEqualTo(expected2);
     }
 
     @Test
@@ -72,7 +73,8 @@ class AppTest {
                 {".", ".", ",", ",", "/", "/", "*", "*"},
                 {".", ".", ",", ",", "/", "/", "*", "*"},
         };
-        Assertions.assertEquals(actual3, expected3);
+        Assertions.assertThat(actual3)
+                .isEqualTo(expected3);
     }
 }
 // END
