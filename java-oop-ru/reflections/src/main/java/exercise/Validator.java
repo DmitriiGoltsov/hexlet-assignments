@@ -37,7 +37,7 @@ class Validator {
         return result;
     }
 
-    public static Map<String, List<String>> advancedValidate(Object obj) {
+    /*public static Map<String, List<String>> advancedValidate(Object obj) {
 
         Map<String, List<String>> result = new HashMap<>();
 
@@ -65,6 +65,6 @@ class Validator {
 
         return result;
 
-    }
+    }*/
 }
 // END

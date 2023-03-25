@@ -5,14 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0b15364e-d38e-4429-830c-828ffec5efd7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../lambdaLearning1/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../lambdaLearning1/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../lambdaLearning1/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../lambdaLearning1/gradlew.bat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../java-collections-ru/maps/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../java-collections-ru/maps/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../java-collections-ru/other-collections/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../java-collections-ru/other-collections/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../java-collections-ru/tests/src/test/java/exercise/AppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java-collections-ru/tests/src/test/java/exercise/AppTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../interfaces/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../interfaces/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise/Address.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise/Validator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise/Validator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,13 +58,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/dmitrii-goltsov/Hexlet/hexlet-assignments/java-oop-ru/reflections&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/home/dmitrii-goltsov/Hexlet/hexlet-assignments/java-oop-ru/reflections"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="ValidationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
