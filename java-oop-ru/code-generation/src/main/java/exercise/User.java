@@ -1,12 +1,8 @@
 package exercise;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.Value;
 
 // BEGIN
-@Getter
-@AllArgsConstructor
 @Value
 // END
 class User {

@@ -9,14 +9,10 @@ import java.util.Collections;
 // BEGIN
 public class App {
 
-    public static void save(Path path, Car item) {
+    public static void save(Path path, Car item) throws IOException {
 
         String json = item.serialize();
-        try {
-            Files.write(path, Collections.singleton(json), StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        Files.write(path, Collections.singleton(json), StandardCharsets.UTF_8);
 
     }
 
@@ -32,6 +28,7 @@ public class App {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
+
     }
 }
 // END
