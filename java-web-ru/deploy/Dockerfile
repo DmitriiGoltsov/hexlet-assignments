@@ -6,6 +6,4 @@ COPY /src .
 
 RUN gradle installDist
 
-# CMD ./java-web-ru/deploy
-
 CMD ./build/install/deploy/bin/deploy
