@@ -1,6 +1,6 @@
 FROM gradle:7.4.0-jdk17
 
-WORKDIR /
+WORKDIR /java-web-ru/deploy .
 
 COPY /src .
 
