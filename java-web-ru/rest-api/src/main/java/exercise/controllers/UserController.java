@@ -52,7 +52,8 @@ public class UserController implements CrudHandler {
         userBodyValidator
                 .check(user -> !user.getFirstName().isEmpty(), "New user should have a name!")
                 .check(user -> !user.getLastName().isEmpty(), "New user should have a surname!")
-                .check(user -> EmailValidator.getInstance().isValid(user.getEmail()), "Email you tried to use is not valid!")
+                .check(user -> EmailValidator.getInstance().isValid(user.getEmail()),
+                        "Email you tried to use is not valid!")
                 .check(user -> {
                     Predicate<String> predicate = x -> x.contains("*") && x.length() > 4;
                     return predicate.test(user.getEmail());
