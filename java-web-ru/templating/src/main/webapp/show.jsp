@@ -12,6 +12,7 @@
     <body>
         <p>id: ${user.get("id")}<p>
         <p>name: ${user.get("firstName")}<p>
+        <p>lastname: ${user.get("lastName")}<p>
         <p>email: ${user.get("email")}<p>
     </body>
 </html>
