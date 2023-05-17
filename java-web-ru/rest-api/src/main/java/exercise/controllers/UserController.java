@@ -11,6 +11,7 @@ import java.util.function.Predicate;
 
 import exercise.domain.User;
 import exercise.domain.query.QUser;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.routines.EmailValidator;
 
 public class UserController implements CrudHandler {
@@ -49,18 +50,13 @@ public class UserController implements CrudHandler {
 
         BodyValidator<User> userBodyValidator =  ctx.bodyValidator(User.class);
 
-//        userBodyValidator
-//                .check(user -> !user.getFirstName().isEmpty(), "New user should have a name!")
-//                .check(user -> !user.getLastName().isEmpty(), "New user should have a surname!")
-//                .check(user -> EmailValidator.getInstance().isValid(user.getEmail()),
-//                        "Email you tried to use is not valid!")
-//                .check(user -> {
-//                    Predicate<String> predicate = x -> x.contains("*") && x.length() > 4;
-//                    return predicate.test(user.getEmail());
-//                }, "Password has to contain at least five symbols including at least one \"*\"!")
-//                .get();
-//
-//        Map<String, List<ValidationError<User>>> errors = userBodyValidator.errors();
+        userBodyValidator
+                .check(it -> it.getFirstName().length() > 0, "First name can not be empty")
+                .check(it -> it.getLastName().length() > 0, "Last name can not be empty")
+                .check(it -> EmailValidator.getInstance().isValid(it.getEmail()), "Should be valid email")
+                .check(it -> StringUtils.isNumeric(it.getPassword()), "Password must contains only digits")
+                .check(it -> it.getPassword().length() >= 4, "Password must contain at least 4 characters")
+                .get();
 
         userToCreate.save();
         // END
