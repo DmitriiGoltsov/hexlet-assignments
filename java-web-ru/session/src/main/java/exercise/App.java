@@ -43,8 +43,8 @@ public class App {
 
         // BEGIN
         tomcat.addServlet(ctx, SessionServlet.class.getSimpleName(), new SessionServlet());
-        ctx.addServletMappingDecoded("/login", UsersServlet.class.getSimpleName());
-        ctx.addServletMappingDecoded("/logout", UsersServlet.class.getSimpleName());
+        ctx.addServletMappingDecoded("/login", SessionServlet.class.getSimpleName());
+        ctx.addServletMappingDecoded("/logout", SessionServlet.class.getSimpleName());
         // END
 
         return tomcat;

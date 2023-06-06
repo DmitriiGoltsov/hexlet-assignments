@@ -61,10 +61,10 @@ public class SessionServlet extends HttpServlet {
         Map<String, String> user = users.findByEmail(email);
 
         if (user == null || !user.get("password").equals(password)) {
+            response.setStatus(422);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login.jsp");
             request.setAttribute("user", user);
             session.setAttribute("flash", "Неверные логин или пароль");
-            response.setStatus(422);
             requestDispatcher.forward(request, response);
             return;
         }

@@ -42,7 +42,7 @@
         <div class="container mt-3">
             <!-- BEGIN -->
             <div class="alert alert-info" role="alert">
-                ${sessionScope.attributeName}
+                ${sessionScope.flash}
             </div>
             <% session.removeAttribute("flash"); %>
             <!-- END -->
