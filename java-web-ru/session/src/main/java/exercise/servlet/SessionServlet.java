@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.RequestDispatcher;
 
 import java.util.Map;
+import java.util.Objects;
 
 import static exercise.App.getUsers;
 import exercise.Users;
@@ -53,26 +54,25 @@ public class SessionServlet extends HttpServlet {
 
         // BEGIN
         HttpSession session = request.getSession();
-        session.removeAttribute("flash");
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
         Map<String, String> user = users.findByEmail(email);
 
-        if (user != null && user.get("password").equals(password)) {
-            session.setAttribute("userId", user.get("id"));
-            session.setAttribute("flash", "Вы успешно вошли");
-
-            response.sendRedirect("/");
-        } else {
-            response.setStatus(422);
-            session.setAttribute("user", user);
-            session.setAttribute("flash", "Неверный логин и пароль");
-
+        if (user == null || !user.get("password").equals(password)) {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login.jsp");
+            request.setAttribute("user", user);
+            session.setAttribute("flash", "Неверные логин или пароль");
+            response.setStatus(422);
             requestDispatcher.forward(request, response);
+            return;
         }
+
+        session.setAttribute("userId", user.get("id"));
+        session.setAttribute("flash", "Вы успешно вошли");
+
+        response.sendRedirect("/");
         // END
     }
 
