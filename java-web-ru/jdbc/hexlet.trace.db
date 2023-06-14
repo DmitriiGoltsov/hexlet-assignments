@@ -1,0 +1,4 @@
+2023-06-14 15:43:49 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "?;[*]"; ожидалось "[, ::, AT, FORMAT, ="
+Syntax error in SQL statement "?;[*]"; expected "[, ::, AT, FORMAT, ="; SQL statement:
+?; [42001-200]
