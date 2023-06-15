@@ -48,12 +48,8 @@ public class ArticlesServlet extends HttpServlet {
         String action = getAction(request);
 
         switch (action) {
-            case "list":
-                showArticles(request, response);
-                break;
-            default:
-                showArticle(request, response);
-                break;
+            case "list" -> showArticles(request, response);
+            default -> showArticle(request, response);
         }
     }
 
@@ -64,35 +60,36 @@ public class ArticlesServlet extends HttpServlet {
         ServletContext context = request.getServletContext();
         Connection connection = (Connection) context.getAttribute("dbConnection");
         // BEGIN
-        int id = 1;
-        Integer idFromParameter = Integer.parseInt(request.getParameter("id"));
-        if (Objects.nonNull(idFromParameter)) {
-            id = idFromParameter;
-        }
-        String title = "";
-        String body = "";
+
+        List<Map<String, String>> articles = new ArrayList<>();
+
+        int articlesPerPage = 10;
+        String page = request.getParameter("page");
+        int normalizedPage = page == null ? 1 : Integer.parseInt(page);
+        int offset = (normalizedPage - 1) * articlesPerPage;
+
+        String query = "SELECT * FROM articles ORDER BY id ASC LIMIT 10 OFFSET ?";
 
         try {
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("SELECT id, title, body FROM articles WHERE id = ?");
-            preparedStatement.setInt(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet != null) {
-                resultSet.first();
-                if (resultSet.getRow() != 0) {
-                    title = resultSet.getString("title");
-                    body = resultSet.getString("body");
-                } else {
-                    response.setStatus(404);
-                }
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, offset);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                articles.add(Map.of(
+                        "id", rs.getString("id"),
+                        "title", rs.getString("title"),
+                        "body", rs.getString("body")
+                        )
+                );
             }
         } catch (SQLException error) {
-            error.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             return;
         }
-        request.setAttribute("title", title);
-        request.setAttribute("body", body);
+
+        request.setAttribute("articles", articles);
+        request.setAttribute("page", normalizedPage);
         // END
         TemplateEngineUtil.render("articles/index.html", request, response);
     }
@@ -104,8 +101,32 @@ public class ArticlesServlet extends HttpServlet {
         ServletContext context = request.getServletContext();
         Connection connection = (Connection) context.getAttribute("dbConnection");
         // BEGIN
-        
+        String articleId = getId(request);
+        Map<String, String> article;
+
+        String query = "SELECT id, title, body FROM articles WHERE id = ?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, articleId);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (!rs.first()) {
+                article = null;
+            } else {
+                article = Map.of(
+                        "id", rs.getString("id"),
+                        "title", rs.getString("title"),
+                        "body", rs.getString("body")
+                );
+            }
+
+        } catch (SQLException e) {
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return;
+        }
         // END
+        request.setAttribute("article", article);
         TemplateEngineUtil.render("articles/show.html", request, response);
     }
 }

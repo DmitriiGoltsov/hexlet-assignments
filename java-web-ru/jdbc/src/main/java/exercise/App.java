@@ -80,6 +80,9 @@ public class App {
         Statement statement = connection.createStatement();
 
         statement.execute(fileContent);
+
+        statement.close();
+        connection.close();
         // END
         int port = getPort();
         Tomcat app = getApp(port, connection);
