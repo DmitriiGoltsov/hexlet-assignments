@@ -112,7 +112,8 @@ public class ArticlesServlet extends HttpServlet {
             ResultSet rs = preparedStatement.executeQuery();
 
             if (!rs.first()) {
-                article = null;
+                response.sendError(HttpServletResponse.SC_NOT_FOUND);
+                return;
             } else {
                 article = Map.of(
                         "id", rs.getString("id"),

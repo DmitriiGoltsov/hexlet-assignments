@@ -7,7 +7,7 @@ layout:decorate="~{layouts/application.html}">
 </head>
 <section layout:fragment="content">
   <!-- BEGIN -->
-  <p th:text="${title}">title</p>
-  <p th:text="${body}">body</p>
+  <h3 th:text="${article.title}"></h3>
+  <p th:text="${article.body}"></p>
   <!-- END -->
 </section>
