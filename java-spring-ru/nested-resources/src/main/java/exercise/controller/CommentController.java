@@ -55,16 +55,17 @@ public class CommentController {
     }
 
     @PatchMapping(path = "/{postId}/comments/{commentId}")
-    public void updateCommentInId(@PathVariable(name = "postId") Long postId,
+    public Comment updateComment(@PathVariable(name = "postId") Long postId,
                                   @PathVariable(name = "commentId") Long commentId,
-                                  @PathVariable(name = "content") String content) {
+                                  @RequestBody Comment newComment) {
 
-        Comment comment = commentRepository.findCommentByIdAndPostId(postId, commentId)
+        Comment oldComment = commentRepository.findCommentByIdAndPostId(postId, commentId)
                 .orElseThrow(() -> new ResourceNotFoundException("The comment with current id was not found"));
 
-        comment.setContent(content);
+        newComment.setId(commentId);
+        newComment.setPost(oldComment.getPost());
 
-        commentRepository.save(comment);
+        return commentRepository.save(newComment);
     }
 
     @DeleteMapping(path = "/{postId}/comments/{commentId}")
