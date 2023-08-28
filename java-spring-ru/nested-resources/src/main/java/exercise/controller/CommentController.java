@@ -1,5 +1,6 @@
 package exercise.controller;
 
+import exercise.dto.CommentDto;
 import exercise.model.Comment;
 import exercise.repository.CommentRepository;
 import exercise.model.Post;
@@ -35,8 +36,8 @@ public class CommentController {
             @PathVariable(name = "postId") Long postId,
             @PathVariable(name = "commentId") Long commentId) {
 
-        return commentRepository.findCommentByIdAndPostId(postId, commentId)
-                .orElseThrow(() -> new ResourceNotFoundException("Comment with such id was not found"));
+        return commentRepository.findCommentByPostIdAndId(postId, commentId)
+                .orElseThrow(() -> new ResourceNotFoundException("Comment with id " + commentId + " was not found"));
     }
 
     @PostMapping(path = "/{postId}/comments")
@@ -45,7 +46,7 @@ public class CommentController {
             @RequestBody Comment comment) {
 
         Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new ResourceNotFoundException("The post with current id was not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("The post with id " + postId + " was not found"));
 
         comment.setPost(post);
 
@@ -55,25 +56,24 @@ public class CommentController {
     }
 
     @PatchMapping(path = "/{postId}/comments/{commentId}")
-    public Comment updateComment(@PathVariable(name = "postId") Long postId,
-                                  @PathVariable(name = "commentId") Long commentId,
-                                  @RequestBody Comment newComment) {
+    public Comment updateComment(@PathVariable Long postId,
+                                 @PathVariable Long commentId,
+                                 @RequestBody CommentDto commentDto) {
 
-        Comment oldComment = commentRepository.findCommentByIdAndPostId(postId, commentId)
-                .orElseThrow(() -> new ResourceNotFoundException("The comment with current id was not found"));
+        Comment oldComment = commentRepository.findCommentByPostIdAndId(postId, commentId)
+                .orElseThrow(() -> new ResourceNotFoundException("The comment with id " + commentId + " was not found"));
 
-        newComment.setId(commentId);
-        newComment.setPost(oldComment.getPost());
+        oldComment.setContent(commentDto.content());
 
-        return commentRepository.save(newComment);
+        return commentRepository.save(oldComment);
     }
 
     @DeleteMapping(path = "/{postId}/comments/{commentId}")
     public void deleteCommentFromPost(@PathVariable(name = "postId") Long postId,
                                       @PathVariable(name = "commentId") Long commentId) {
 
-        Comment comment = commentRepository.findCommentByIdAndPostId(postId, commentId)
-                .orElseThrow(() -> new ResourceNotFoundException("The comment with current id was not found"));
+        Comment comment = commentRepository.findCommentByPostIdAndId(postId, commentId)
+                .orElseThrow(() -> new ResourceNotFoundException("The comment with id " + commentId + " was not found"));
 
         commentRepository.delete(comment);
     }
