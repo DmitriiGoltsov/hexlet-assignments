@@ -9,6 +9,34 @@ import java.util.concurrent.ExecutionException;
 
 class App {
 
+    public static CompletableFuture<Long> getDirectorySize(String directoryPath) {
+
+        return CompletableFuture.supplyAsync(() -> {
+            Long size;
+
+            try {
+                size = Files.walk(getAbsoluteNormilizedPath(directoryPath), 1)
+                        .filter(Files::isRegularFile)
+                        .mapToLong(file -> {
+                            try {
+                                return Files.size(file);
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        })
+                        .sum();
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            return size;
+        }).exceptionally(ex -> {
+            System.out.println("An exception has occurred " + ex.getMessage());
+            return null;
+        });
+    }
+
     // BEGIN
     public static CompletableFuture<String> unionFiles(String file1Path,
                                                        String file2Path,
@@ -64,7 +92,6 @@ class App {
         Files.writeString(path, content);
     }
 
-
     private static Path getAbsoluteNormilizedPath(String filePAth) {
         return Path.of(filePAth).toAbsolutePath().normalize();
     }
@@ -78,6 +105,11 @@ class App {
                 "src/main/resources/result_file.txt");
 
         System.out.println(result.get());
+
+        CompletableFuture<Long> size = getDirectorySize("src/main/resources");
+        result.get();
+        System.out.println("done!");
+        System.out.println(size.get());
         // END
     }
 }
